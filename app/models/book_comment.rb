@@ -1,5 +1,5 @@
 class BookComment < ApplicationRecord
   belongs_to :user
-  belongs_to :
-  validates :book_comment
+  belongs_to :book
+  validates :comment, length: {minimum: 1}
 end
