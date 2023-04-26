@@ -35,6 +35,13 @@
             </td>
           <% end %>
           <td>コメント数:<%= @book.book_comments.count %></td>
+          <td>
+            <% @book.book_comments.each do |comment| %>
+              <%= if comment.user == current_user %>
+                <%= link_to "Destroy", book_book_comment_path,method: :delete %>
+              <% end %>
+            <% end %>
+          </td>
         </tr>
       </table>
       <div>
