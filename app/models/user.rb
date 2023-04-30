@@ -27,11 +27,11 @@ def get_profile_image(width, height)
 end
 
 def follow(user_id)
-  follower.create(followed_id: user_id)
+  relationships.create(followed_id: user_id)
 end
 
 def unfollow(user_id)
-  follower.find_by(followed_id: user_id).destroy
+  relationships.find_by(followed_id: user_id).destroy
 end
 
 def following?(user)
