@@ -9,8 +9,8 @@ class User < ApplicationRecord
   has_many :book_comments,dependent: :destroy
   has_many :follower,class_name: "Relationship",foreign_key: "follower_id",dependent: :destroy
   has_many :followed,class_name: "Relationship",foreign_key: "followed_id",dependent: :destroy
-  has_many :follow_ed, through: :follower,source: :followed
   has_many :follow_er, through: :followed,source: :follower
+  has_many :follow_ed, through: :follower,source: :followed
   has_one_attached :profile_image
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
@@ -24,5 +24,17 @@ def get_profile_image(width, height)
     profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
   end
   profile_image.variant(resize_to_limit: [width, height]).processed
+end
+
+def follow(user_id)
+  follower.create(followed_id: user_id)
+end
+
+def unfollow(user_id)
+  follower.find_by(followed_id: user_id).destroy
+end
+
+def following(user)
+  following.include?(user)
 end
 end
