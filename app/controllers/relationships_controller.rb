@@ -1,6 +1,6 @@
 class RelationshipsController < ApplicationController
   def create
-    current_user.follow(paarams[:id])
+    current_user.follow(params[:id])
     redirect_to request.referer
   end
 
