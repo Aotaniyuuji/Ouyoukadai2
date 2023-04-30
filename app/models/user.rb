@@ -9,8 +9,8 @@ class User < ApplicationRecord
   has_many :book_comments,dependent: :destroy
   has_many :follower,class_name: "Relationship",foreign_key: "follower_id",dependent: :destroy
   has_many :followed,class_name: "Relationship",foreign_key: "followed_id",dependent: :destroy
-  has_many :follow_er, through: :followed,source: :follower
-  has_many :follow_ed, through: :follower,source: :followed
+  has_many :followings, through: :followed,source: :follower
+  has_many :followers, through: :follower,source: :followed
   has_one_attached :profile_image
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
@@ -34,7 +34,7 @@ def unfollow(user_id)
   follower.find_by(followed_id: user_id).destroy
 end
 
-def following(user)
-  following.include?(user)
+def following?(user)
+  followings.include?(user)
 end
 end
