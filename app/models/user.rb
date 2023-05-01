@@ -39,6 +39,16 @@ def following?(user)
 end
 
 def self.looks(search, word)
-  
+  if search == "perfect_match"
+    @user = User.where("name LIKE?", "#{word}")
+  elsif search == "forword_match"
+    @user = User.where("name LIKE?", "#{word}%")
+  elsif search == "backword_match"
+    @user = User.where("name LIKE?", "%#{word}")
+  elsif search == "partial_match"
+    @user = User.where("name LIKE?", "%#{word}%")
+  else
+    @user = User.all
+  end
 end
 end
