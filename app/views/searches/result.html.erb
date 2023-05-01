@@ -1,5 +1,8 @@
 <h2>
-  Result index
+  <% if @range == "User" %>
+  Users search for <%= "#{word}" %>
+  <% else %>
+  Books search for <%= "#{word}" %>
 </h2>
 
 <div class="container">
