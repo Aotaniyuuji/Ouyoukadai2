@@ -37,4 +37,8 @@ end
 def following?(user)
   followings.include?(user)
 end
+
+def self.looks(search, word)
+  
+end
 end
