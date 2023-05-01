@@ -1,9 +1,5 @@
 <h2>
-  <% if @range == "User" %>
-    User search for<%= %>
-  <% else %>
-    Book search for<%= %>
-  <% end %>
+    <%= @range %> search for "<%= @word %>"
 </h2>
 
 <div class="container">
