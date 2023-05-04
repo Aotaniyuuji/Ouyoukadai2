@@ -1,4 +1,16 @@
-<%= form_with model:[book,book_comment],local: false do |f| %>
-  <%= f.text_area :comment %><br>
-  <%= f.submit "送信" %>
-<% end %>
+<table>
+  <% book.book_comments.each do |comment| %>
+    <tr>
+      <td>
+        <%= link_to user_path(comment.user_id) do %>
+          <%= image_tag comment.user.get_profile_image(100,100) %>
+            <%= comment.user.name %>
+        <% end %>
+        <%= comment.comment %>
+        <% if comment.user == current_user %>
+          <%= link_to "Destroy", book_book_comment_path(comment.book,comment),method: :delete,remote: true class: "btn btn-sm btn-danger" %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
